@@ -1,0 +1,15 @@
+digraph TREE {
+    { node [label="1", fontname="Arial"]; A }
+    { node [label="2", fontname="Arial"]; B }
+    { node [label="3", fontname="Arial"]; C }
+    { node [label="4", fontname="Arial"]; D }
+    { node [label="5", fontname="Arial"]; E }
+    { node [label="6", fontname="Arial"]; F }
+    { node [label="7", fontname="Arial"]; G }
+    A -> B;
+    A -> C;
+    B -> D;
+    B -> E;
+    C -> F;
+    C -> G;
+}

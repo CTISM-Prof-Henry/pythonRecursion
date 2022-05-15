@@ -4,16 +4,23 @@ A [recursão](https://pt.wikipedia.org/wiki/Recursividade_(ci%C3%AAncia_da_compu
 "dividir para conquistar", onde um problema grande é dividido em problemas 
 menores, que por sua vez são resolvidos.
 
-Considere o seguinte exemplo. Vamos supor que tenhamos uma 
-[árvore binária](https://pt.wikipedia.org/wiki/%C3%81rvore_bin%C3%A1ria) que 
-gostaríamos de percorrer:
+## Sumário
+
+* [Introdução](#introdução)
+* [Características](#características)
+* [Referências](#referências)
+
+## Introdução
+
+Vamos considerar o seguinte exemplo. Considerando uma 
+[árvore binária](https://pt.wikipedia.org/wiki/%C3%81rvore_bin%C3%A1ria) da seguinte
+estrutura:
 
 <img src = "images/balanced_binary_tree.svg" alt="árvore binária balanceada e completa com 7 nodos"/>
 
 Esta árvore codifica a equação `y = (x-5)*(x+7)` (**y** está implícito).
 
-Como você percorreria esta árvore? Você logo irá perceber que percorrê-la usando laços de repetição é uma tarefa difícil. 
-Podemos escrever
+Como poderíamos fazer para percorrer esta árvore? Podemos escrever
 
 ```python
 # representação em heap da árvore binária
@@ -23,13 +30,12 @@ for i in range(len(tree)):
 ```
 
 Mas isso não fará com que a árvore seja percorrida corretamente (pelo menos os itens não serão impressos na ordem correta). 
-Se você tentar, verá que é muito difícil desenvolver um código-fonte **simples** que realize esta tarefa.
+Se tentarmos, vamos perceber que é muito difícil escrever um algoritmo **simples**
+que percorra a árvore utilizando apenas **laços de repetição**.
 
-Com recursão, contudo, o código-fonte é
+Com recursão, contudo, o código-fonte fica muito mais simples:
 
 ```python
-# representação em heap da árvore binária
-tree = ['*', '-', '+', 'x', '5', 'x', '7']
 def percorre(i, graph):
     if i >= len(tree):
        return 
@@ -41,10 +47,81 @@ def percorre(i, graph):
     print(graph[i], end=' ')
     percorre(rgt, graph)
 
+# representação em heap da árvore binária
+tree = ['*', '-', '+', 'x', '5', 'x', '7']
 percorre(0, tree)
 ```
 
 A saída será exatamente o que queremos: `x - 5 * x + 7`
+
+Vamos entender o que está acontecendo aqui. Após **definir** a função `percorre`
+(e lembrando que **definir** é diferente de **invocar**, de **executar**), as duas primeiras instruções que são executadas são
+
+```python
+tree = ['*', '-', '+', 'x', '5', 'x', '7']
+percorre(0, tree)
+```
+
+Ou seja, estamos definindo a árvore como se fosse uma lista de valores (chamamos
+isso na Ciência da Computação de 
+[árvore heap](https://en.wikipedia.org/wiki/Heap_(data_structure))), 
+e depois **invocando** a função `percorre`, passando
+como parâmetros o **índice do nó-raiz da árvore** (que é sempre zero; nós sempre
+começamos a percorrer a lista de valores pelo índice zero), e a própria árvore,
+como uma lista de valores. 
+
+Dentro da função `percorre`, o primeiro pedaço de código-fonte que encontramos
+é o que chamamos de **condição de parada**:
+
+```python
+if i >= len(tree):
+       return 
+```
+
+A condição de parada testa se o índice do nó atual é maior do que o comprimento 
+da árvore. 
+
+Após este teste, calculamos o índice dos nós-filho da esquerda `lft` e direita 
+`rgt`, e logo em seguida chamamos a função `percorre` novamente, passando o nó-filho
+da esquerda `lft` como parâmetro:
+
+```python
+lft = (i * 2) + 1
+rgt = (i * 2) + 2
+
+percorre(lft, graph)
+```
+
+Esta é a parte do "dividir" em "dividir para
+conquistar": estamos dividindo o problema em subproblemas menores, antes de resolvê-lo.
+
+Perceba que este passo-a-passo (checar a condição de parada, calcular os índices
+dos nós-filho, e seguir primeiro pelo filho da esquerda) seguirá até que a condição de parada seja alcançada. Uma vez que ela for alcançada, iremos imprimir a informação
+do nó atual, e seguir pelo filho da direita:
+
+```python
+print(graph[i], end=' ')
+percorre(rgt, graph)    
+```
+
+Os índices dos nodos como eles **aparecem** na lista `tree`, e os índices como 
+eles são **impressos** pelo algoritmo recursivo são mostrados abaixo:
+
+<img src = "images/list_indices.svg" alt="índices na lista da árvore
+binária balanceada"/>
+<img src = "images/running_indices.svg" alt="índices como são percorridos pelo
+algoritmo recursivo"/>
+
+## Características
+
+As características de um algoritmo recursivo são as seguintes:
+
+* Subdivide um problema grande em problemas menores
+* Chama a si mesmo dentro do seu código-fonte
+* Possui uma condição de parada para verificar quando não mais for necessário
+  subdividir o problema
+
+## Exercícios
 
 ## Referências
 
