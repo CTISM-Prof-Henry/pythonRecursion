@@ -8,6 +8,7 @@ menores, que por sua vez são resolvidos.
 
 * [Introdução](#introdução)
 * [Características](#características)
+* [Exercícios](#exercícios)
 * [Referências](#referências)
 
 ## Introdução
@@ -122,6 +123,31 @@ As características de um algoritmo recursivo são as seguintes:
   subdividir o problema
 
 ## Exercícios
+
+1. Escreva uma função recursiva para calcular a soma de uma lista de listas:
+   ```python
+   def somador(a):
+       pass  # defina o código-fonte aqui
+   
+   lista = [2, 3, [5,7], [11,13]]
+   somador(lista)  # saída deve ser 41 
+   ```
+
+2. Escreva uma função **não-recursiva** para resolver o exercício da tarefa 1, para as seguintes listas:
+   * `[2, 3, [5,7], [11,13]]`
+   * `[2, [3], [4, 5], [[1]], [[[3], 2], 1]`
+
+3. Sem utilizar a função `sorted` de Python, escreva um algoritmo não-recursivo para ordenar uma lista de valores:
+   ```python
+   def ordenador(a):
+       pass  # defina o código-fonte aqui
+   
+   lista = [2, 3, [5,7], [11,13]]
+   ```
+
+4. Escreva um algoritmo **recursivo** para resolver o problema do exercício 3. Dica: você pode se inspirar no 
+   [quicksort](https://pt.wikipedia.org/wiki/Quicksort), mas você deve mesmo assim escrever sua própria implementação
+   em Python.
 
 ## Referências
 
